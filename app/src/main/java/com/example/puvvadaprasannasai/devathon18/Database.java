@@ -1,3 +1,5 @@
+package com.example.puvvadaprasannasai.devathon18;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -32,15 +34,15 @@ public class Database extends SQLiteOpenHelper{
 
     public void insert_case(SQLiteDatabase db){
 
-        EditText cc_no=(EditText) findViewById(R.id.cc_no);
+       /* EditText cc_no=(EditText) findViewById(R.id.cc_no);
         EditText section=(EditText) findViewById(R.id.section);
         EditText court=(EditText) findViewById(R.id.court);
         EditText date_filing=(EditText) findViewById(R.id.date_filing);
         EditText name=(EditText) findViewById(R.id.name);
         EditText address=(EditText) findViewById(R.id.address);
-        EditText mob_no=(EditText) findViewById(R.id.mob_no);
+        EditText mob_no=(EditText) findViewById(R.id.mob_no);*/
 
-        db.insert()
+       /* db.insert()*/
 
     }
 }

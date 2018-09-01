@@ -1,5 +1,6 @@
 package com.example.puvvadaprasannasai.devathon18;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,7 +15,10 @@ import com.desai.vatsal.mydynamiccalendar.EventModel;
 import com.desai.vatsal.mydynamiccalendar.GetEventListListener;
 import com.desai.vatsal.mydynamiccalendar.MyDynamicCalendar;
 import com.desai.vatsal.mydynamiccalendar.OnDateClickListener;
+import com.desai.vatsal.mydynamiccalendar.OnEventClickListener;
+import com.desai.vatsal.mydynamiccalendar.OnWeekDayViewClickListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -25,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d("Main", "onCreate: ");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         myDynamicCalendar=findViewById(R.id.myCalendar);
@@ -33,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(Date date) {
                 Log.d("date", String.valueOf(date));
+                Intent intent=new Intent(MainActivity.this,Form.class);
+                intent.putExtra("date",date);
+                startActivity(intent);
             }
 
             @Override
@@ -41,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        myDynamicCalendar.setCalendarBackgroundColor("#eeeeee"); //gray
+        myDynamicCalendar.setCalendarBackgroundColor("#008080"); //gray
         myDynamicCalendar.setHeaderBackgroundColor("#454265");//black
-        myDynamicCalendar.setHeaderTextColor("#ffffff");//white
+        myDynamicCalendar.setHeaderTextColor("#FFFF33");//white
         myDynamicCalendar.setNextPreviousIndicatorColor("#245675");//black
-        myDynamicCalendar.setWeekDayLayoutBackgroundColor("#965471");
-        myDynamicCalendar.setWeekDayLayoutTextColor("#246245");
+        myDynamicCalendar.setWeekDayLayoutBackgroundColor("#8743e8");
+        myDynamicCalendar.setWeekDayLayoutTextColor("#FFFF33");
 
         myDynamicCalendar.isSaturdayOff(true, "#ffffff", "#ff0000");
         myDynamicCalendar.isSaturdayOff(true, R.color.white, R.color.red);
@@ -54,14 +62,14 @@ public class MainActivity extends AppCompatActivity {
         myDynamicCalendar.isSundayOff(true, "#658745", "#254632");
         myDynamicCalendar.isSundayOff(true, R.color.white, R.color.red);
 
-        myDynamicCalendar.setExtraDatesOfMonthBackgroundColor("#324568");
+        myDynamicCalendar.setExtraDatesOfMonthBackgroundColor("#e0d870");
         myDynamicCalendar.setExtraDatesOfMonthTextColor("#756325");
 
-        myDynamicCalendar.setDatesOfMonthBackgroundColor("#145687");
+        myDynamicCalendar.setDatesOfMonthBackgroundColor("#edaaaa");
         myDynamicCalendar.setDatesOfMonthTextColor("#745632");
 
-        myDynamicCalendar.setCurrentDateTextColor("#00e600");
-        myDynamicCalendar.setCurrentDateBackgroundColor("#123412");
+        myDynamicCalendar.setCurrentDateTextColor("#000500");
+        myDynamicCalendar.setCurrentDateBackgroundColor("#870202");
 
         myDynamicCalendar.setEventCellBackgroundColor("#852365");
         myDynamicCalendar.setEventCellTextColor("#425684");
@@ -78,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void eventList(ArrayList<EventModel> eventList) {
 
-                Log.e("tag", "eventList.size():-" + eventList.size());
+                Log.d("tag", "eventList.size():-" + eventList.size());
                 for (int i = 0; i < eventList.size(); i++) {
-                    Log.e("tag", "eventList.getStrName:-" + eventList.get(i).getStrName());
+                    Log.d("tag", "eventList.getStrName:-" + eventList.get(i).getStrName());
                 }
 
             }
@@ -90,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         myDynamicCalendar.setBelowMonthEventDividerColor("#635478");
 
-        myDynamicCalendar.setHolidayCellBackgroundColor("#654248");
+        myDynamicCalendar.setHolidayCellBackgroundColor("#21ea02");
 
         myDynamicCalendar.setHolidayCellTextColor("#d590bb");
 
@@ -102,20 +110,14 @@ public class MainActivity extends AppCompatActivity {
         myDynamicCalendar.addHoliday("13-11-2016");
         myDynamicCalendar.addHoliday("8-10-2016");
         myDynamicCalendar.addHoliday("10-12-2016");
+        myDynamicCalendar.addHoliday("5-09-2018");
 
 
 
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
     }
 
     @Override
@@ -158,15 +160,99 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAgendaView() {
+        myDynamicCalendar.showAgendaView();
+
+        myDynamicCalendar.setOnDateClickListener(new OnDateClickListener() {
+            @Override
+            public void onClick(Date date) {
+                Log.e("date", String.valueOf(date));
+            }
+
+            @Override
+            public void onLongClick(Date date) {
+                Log.e("date", String.valueOf(date));
+            }
+        });
     }
 
     private void showDayView() {
+        myDynamicCalendar.showDayView();
+
+        myDynamicCalendar.setOnEventClickListener(new OnEventClickListener() {
+            @Override
+            public void onClick() {
+                Log.e("showDayView", "from setOnEventClickListener onClick");
+
+            }
+
+            @Override
+            public void onLongClick() {
+                Log.e("showDayView", "from setOnEventClickListener onLongClick");
+
+            }
+        });
+
+        myDynamicCalendar.setOnWeekDayViewClickListener(new OnWeekDayViewClickListener() {
+            @Override
+            public void onClick(String date, String time) {
+                Log.d("showDayView", "from setOnWeekDayViewClickListener onClick");
+                Log.d("tag", "date:-" + date + " time:-" + time);
+            }
+
+            @Override
+            public void onLongClick(String date, String time) {
+                Log.d("showDayView", "from setOnWeekDayViewClickListener onLongClick");
+                Log.d("tag", "date:-" + date + " time:-" + time);
+            }
+        });
     }
 
     private void showWeekView() {
+        myDynamicCalendar.showWeekView();
+
+        myDynamicCalendar.setOnEventClickListener(new OnEventClickListener() {
+            @Override
+            public void onClick() {
+                Log.d("showWeekView","from setOnEventClickListener onClick");
+            }
+
+            @Override
+            public void onLongClick() {
+                Log.d("showWeekView","from setOnEventClickListener onLongClick");
+
+            }
+        });
+        myDynamicCalendar.setOnWeekDayViewClickListener(new OnWeekDayViewClickListener() {
+            @Override
+            public void onClick(String date, String time) {
+                Log.d("showWeekView", "from setOnWeekDayViewClickListener onClick");
+                Log.d("tag", "date:-" + date + " time:-" + time);
+
+            }
+
+            @Override
+            public void onLongClick(String date, String time) {
+                Log.d("showWeekView", "from setOnWeekDayViewClickListener onLongClick");
+                Log.d("tag", "date:-" + date + " time:-" + time);
+
+            }
+        });
     }
 
     private void showMonthViewWithBelowEvents() {
+        myDynamicCalendar.showMonthViewWithBelowEvents();
+
+        myDynamicCalendar.setOnDateClickListener(new OnDateClickListener() {
+            @Override
+            public void onClick(Date date) {
+                Log.d("date", String.valueOf(date));
+            }
+
+            @Override
+            public void onLongClick(Date date) {
+                Log.d("date", String.valueOf(date));
+            }
+        });
 
 
     }
