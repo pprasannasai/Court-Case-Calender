@@ -18,6 +18,7 @@ import com.desai.vatsal.mydynamiccalendar.OnDateClickListener;
 import com.desai.vatsal.mydynamiccalendar.OnEventClickListener;
 import com.desai.vatsal.mydynamiccalendar.OnWeekDayViewClickListener;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(Date date) {
                 Log.d("date", String.valueOf(date));
+                DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
+                String strDate = dateFormat.format(date);
                 Intent intent=new Intent(MainActivity.this,Form.class);
-                intent.putExtra("date",date);
+                intent.putExtra("date",strDate);
                 startActivity(intent);
             }
 
