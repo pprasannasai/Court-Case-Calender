@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Form"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/cc_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CC Number"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="CC Number"
+        />
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Section"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="Section"
+        />
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/court"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Court"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="Court"
+        />
+    <EditText
+        android:id="@+id/date_filing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Filing Date"
+        android:inputType="date"
+
+        />
+    <EditText
+        android:id="@+id/date_hearing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Hearing Date"
+        android:inputType="date"
+        />
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/w_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Witness Number"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="Witness Number"
+        />
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/w_mob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mobile Number"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="Mobile Number"
+        />
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/w_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Address"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="Address"
+        />
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"/>
+
+</LinearLayout>
