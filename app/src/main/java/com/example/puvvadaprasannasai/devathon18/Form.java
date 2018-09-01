@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import java.util.Date;
 
 public class Form extends AppCompatActivity {
 
     Date date;
+    Button submit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +20,6 @@ public class Form extends AppCompatActivity {
         Intent intent=getIntent();
        // date=new Date(getIntent().get("d1ate", -1));
         Log.d("form","Date Recieved "+date);
-
 
     }
 }
