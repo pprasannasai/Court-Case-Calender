@@ -19,17 +19,8 @@
             android:title="Month With Events"
             app:showAsAction="never" />
 
-        <item
-            android:id="@+id/action_week"
-            android:orderInCategory="300"
-            android:title="Week"
-            app:showAsAction="never" />
 
-        <item
-            android:id="@+id/action_day"
-            android:orderInCategory="400"
-            android:title="Day"
-            app:showAsAction="never" />
+
 
         <item
             android:id="@+id/action_agenda"
