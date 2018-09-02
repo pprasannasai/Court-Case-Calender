@@ -1,66 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Form"
     android:orientation="vertical"
-    android:padding="16dp">
+    tools:context=".Form"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/cc_no"
+        android:id="@+id/w_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="CC Number"
+        android:hint="Witness Number"
+        app:met_floatingLabel="highlight"
+        android:inputType="number"
+        app:met_floatingLabelText="Witness Number"
+        android:layout_marginBottom="10sp"
+        />
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/w_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="Witness Number"
+        android:layout_marginBottom="10sp"
+        />
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/w_mob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mobile Number"
         app:met_floatingLabel="highlight"
         app:met_floatingLabelText="CC Number"
         android:layout_marginBottom="10sp"
         />
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/section"
+        android:id="@+id/w_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Section"
+        android:hint="Address"
         app:met_floatingLabel="highlight"
-        app:met_floatingLabelText="Section"
+        app:met_floatingLabelText="Witness Address"
         android:layout_marginBottom="10sp"
         />
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/court"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Court"
-        app:met_floatingLabel="highlight"
-        app:met_floatingLabelText="Court"
-        android:layout_marginBottom="10sp"
-        />
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/date_filing"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Filing Date"
-        android:inputType="date"
-        android:layout_marginBottom="10sp"
-        android:backgroundTint="@color/colorPrimary"
-
-        />
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/date_hearing"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Hearing Date"
-        android:inputType="date"
-        android:layout_marginBottom="10sp"
-        />
-
     <Button
-        android:id="@+id/Add_Witness"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add New Witness"
         android:background="@color/colorPrimary"
-        android:layout_marginBottom="10sp"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:text="Add Witness"/>
+
 
 </LinearLayout>
