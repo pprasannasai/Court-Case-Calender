@@ -304,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
             do {
                 //  String s=c.getString(0);
                 Toast.makeText(MainActivity.this,Global_storing_data, Toast.LENGTH_SHORT).show();
-                myDynamicCalendar.addEvent(Global_storing_data, "9:00", "10:00", "Case_Number "+c.getString(0)+"Section "+c.getString(1)+" Court "+c.getString(2));
+                myDynamicCalendar.addEvent(Global_storing_data, "9:00", "10:00", "CaseNumber :"+c.getString(0)+"\nSection :"+c.getString(1)+"\nCourt :"+c.getString(2)+"\nHearingDate :"+c.getString(3));
                 /*a=data.get(0);
                 b1= data.get(1);
                 c1= data.get(2);
