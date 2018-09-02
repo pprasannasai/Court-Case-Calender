@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("date", String.valueOf(date));
                 DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
                 String strDate = dateFormat.format(date);
-                Intent intent=new Intent(MainActivity.this,Case_details_activity.class);
+                Intent intent=new Intent(MainActivity.this,Form.class);
                 intent.putExtra("date",strDate);
                 startActivity(intent);
             }
