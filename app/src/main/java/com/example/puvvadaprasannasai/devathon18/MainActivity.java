@@ -1,5 +1,6 @@
 package com.example.puvvadaprasannasai.devathon18;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.desai.vatsal.mydynamiccalendar.EventModel;
 import com.desai.vatsal.mydynamiccalendar.GetEventListListener;
@@ -22,50 +24,94 @@ import com.desai.vatsal.mydynamiccalendar.OnDateClickListener;
 import com.desai.vatsal.mydynamiccalendar.OnEventClickListener;
 import com.desai.vatsal.mydynamiccalendar.OnWeekDayViewClickListener;
 
-import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import static com.example.puvvadaprasannasai.devathon18.DatabaseInstance.db;
 
 public class MainActivity extends AppCompatActivity {
 
-    public Database db;
-
+    public static String Global_storing_data;
+    String strDate;
+    String temp1;
+    String a,b1,c1,d1;
+    List<String> data;
     private MyDynamicCalendar myDynamicCalendar;
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                Global_storing_data = data.getStringExtra("result");
+                loadEvents();
+            }
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        data=((DatabaseInstance) getApplication()).getList();
         Log.d("Main", "onCreate: ");
-
-        //creating database object
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         myDynamicCalendar=findViewById(R.id.myCalendar);
         myDynamicCalendar.showMonthView();
-
         myDynamicCalendar.setOnDateClickListener(new OnDateClickListener() {
             @Override
             public void onClick(Date date) {
                 Log.d("date", String.valueOf(date));
+                DateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY");
 
+
+                strDate = dateFormat.format(date);
+                storing_data(temp1);
                 Intent intent=new Intent(MainActivity.this,Form.class);
-                intent.putExtra("date",date);
-                Bundle bundle=new Bundle();
+                intent.putExtra("date",strDate);
+                startActivityForResult(intent,1);
+               // temp1=dateFormat_1.format(date);
+            }
 
-                startActivity(intent);
+            public void storing_data(String temp1) {
+                Global_storing_data=temp1;
+            }
+            public String get_data() {
+                return Global_storing_data;
             }
 
             @Override
             public void onLongClick(Date date) {
+               // SQLiteDatabase db1=db.getWritableDatabase();
+                /*Cursor c= db1.rawQuery("Select * from case_details where date_filing=?",new String[]{});
+                StringBuffer b=new StringBuffer();
                 Log.d("date", String.valueOf(date));
+                if (c.moveToFirst()) {
+                    do {
+                        //  String s=c.getString(0);
+
+                        a=data.get(0);
+                        b1= data.get(1);
+                        c1= data.get(2);
+                        d1= data.get(3);
+
+                    } while (c.moveToNext());
+
+                }*/
 
             }
         });
-        myDynamicCalendar.setCalendarBackgroundColor("#008080"); //gray
+      //  Log.d("tempp1",temp1);
+        myDynamicCalendar.setCalendarBackgroundColor("#fff9f9"); //gray
         myDynamicCalendar.setHeaderBackgroundColor("#454265");//black
         myDynamicCalendar.setHeaderTextColor("#FFFF33");//white
         myDynamicCalendar.setNextPreviousIndicatorColor("#245675");//black
@@ -90,25 +136,39 @@ public class MainActivity extends AppCompatActivity {
         myDynamicCalendar.setEventCellBackgroundColor("#852365");
         myDynamicCalendar.setEventCellTextColor("#425684");
 
-        myDynamicCalendar.addEvent("5-10-2016", "8:00", "8:15", "Today Event 1");
-        myDynamicCalendar.addEvent("05-10-2016", "8:15", "8:30", "Today Event 2");
-        myDynamicCalendar.addEvent("05-10-2016", "8:30", "8:45", "Today Event 3");
-        myDynamicCalendar.addEvent("05-10-2016", "8:45", "9:00", "Today Event 4");
-        myDynamicCalendar.addEvent("8-10-2016", "8:00", "8:30", "Today Event 5");
-        myDynamicCalendar.addEvent("08-10-2016", "9:00", "10:00", "Today Event 6");
-
-        //SQLiteDatabase db=.getWritableDatabase();
+        myDynamicCalendar.setBelowMonthEventDividerColor("#0f0f0f");
 
 
-        //myDynamicCalendar.addEvent();
+        loadEvents();
+
+       /* for(int i=0;i<data.size();i++){
+            Log.d("database", "onClick: "+data.size());
+        }*/
+      /*  myDynamicCalendar.addEvent("18-09-2018", "9:00", "10:00", "Case_Number "+a);
+       // myDynamicCalendar.addEvent("18-09-2018", "9:00", "10:00", "CaseNumber :CC024 Koi nahi aaya!!!!!!!");
+        myDynamicCalendar.addEvent("18-09-2018", "9:00", "10:00", "CaseNumber :CC025 Judge toh mota hai");
+        myDynamicCalendar.addEvent("18-09-2018", "9:00", "10:00", "CaseNumber :CC026 Kya app 5 pachvi paas se tej ho");
+        myDynamicCalendar.addEvent("18-09-2018", "9:00", "10:00", "CaseNumber :CC027 The Culprit is Punishable");
+        myDynamicCalendar.addEvent("18-09-2018", "9:00", "10:00", "CaseNumber :CC028 Hum honge kamyaab");
+        myDynamicCalendar.addEvent("18-09-2018", "9:00", "10:00", "CaseNumber :CC029 The Culprit is Punishable");
+        myDynamicCalendar.addEvent("26-09-2018", "9:00", "10:00", "Case Detail Event 2");
+        myDynamicCalendar.addEvent("03-09-2018", "9:00", "10:00", "Case Detail Event 3");
+        myDynamicCalendar.addEvent("03-09-2018", "9:00", "10:00", "Case Detail Event 4");
+        myDynamicCalendar.addEvent("02-09-2018", "9:00", "10:00", "Case Detail Event 5");
+        myDynamicCalendar.addEvent("08-09-2018", "9:00", "10:00", "Case Detail Event 6");
+
+*/
+
         myDynamicCalendar.getEventList(new GetEventListListener() {
             @Override
             public void eventList(ArrayList<EventModel> eventList) {
 
-                Log.d("tag", "eventList.size():-" + eventList.size());
-                for (int i = 0; i < eventList.size(); i++) {
-                    Log.d("tag", "eventList.getStrName:-" + eventList.get(i).getStrName());
-                }
+                    Log.d("tag", "eventList.size():-" + eventList.size());
+                    for (int i = 0; i < eventList.size(); i++) {
+                        Log.d("tag", "eventList.getStrName:-" + eventList.get(i).getStrName());
+
+                    }
+
 
             }
         });
@@ -160,12 +220,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_month_with_below_events:
                 showMonthViewWithBelowEvents();
                 return true;
-            /*case R.id.action_week:
-                showWeekView();
-                return true;
-            case R.id.action_day:
-                showDayView();
-                return true;*/
             case R.id.action_agenda:
                 showAgendaView();
                 return true;
@@ -194,69 +248,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void showDayView() {
-        myDynamicCalendar.showDayView();
 
-        myDynamicCalendar.setOnEventClickListener(new OnEventClickListener() {
-            @Override
-            public void onClick() {
-                Log.e("showDayView", "from setOnEventClickListener onClick");
 
-            }
 
-            @Override
-            public void onLongClick() {
-                Log.e("showDayView", "from setOnEventClickListener onLongClick");
-
-            }
-        });
-
-        myDynamicCalendar.setOnWeekDayViewClickListener(new OnWeekDayViewClickListener() {
-            @Override
-            public void onClick(String date, String time) {
-                Log.d("showDayView", "from setOnWeekDayViewClickListener onClick");
-                Log.d("tag", "date:-" + date + " time:-" + time);
-            }
-
-            @Override
-            public void onLongClick(String date, String time) {
-                Log.d("showDayView", "from setOnWeekDayViewClickListener onLongClick");
-                Log.d("tag", "date:-" + date + " time:-" + time);
-            }
-        });
-    }
-
-    private void showWeekView() {
-        myDynamicCalendar.showWeekView();
-
-        myDynamicCalendar.setOnEventClickListener(new OnEventClickListener() {
-            @Override
-            public void onClick() {
-                Log.d("showWeekView","from setOnEventClickListener onClick");
-            }
-
-            @Override
-            public void onLongClick() {
-                Log.d("showWeekView","from setOnEventClickListener onLongClick");
-
-            }
-        });
-        myDynamicCalendar.setOnWeekDayViewClickListener(new OnWeekDayViewClickListener() {
-            @Override
-            public void onClick(String date, String time) {
-                Log.d("showWeekView", "from setOnWeekDayViewClickListener onClick");
-                Log.d("tag", "date:-" + date + " time:-" + time);
-
-            }
-
-            @Override
-            public void onLongClick(String date, String time) {
-                Log.d("showWeekView", "from setOnWeekDayViewClickListener onLongClick");
-                Log.d("tag", "date:-" + date + " time:-" + time);
-
-            }
-        });
-    }
 
     private void showMonthViewWithBelowEvents() {
         myDynamicCalendar.showMonthViewWithBelowEvents();
@@ -264,7 +258,8 @@ public class MainActivity extends AppCompatActivity {
         myDynamicCalendar.setOnDateClickListener(new OnDateClickListener() {
             @Override
             public void onClick(Date date) {
-                Log.d("date", String.valueOf(date));
+              //  myDynamicCalendar.addEvent("18-09-2018", "9:00", "10:00", "CaseNumber :CC029 The Culprit is Punishable");
+              //  Log.d("date", String.valueOf(date));
             }
 
             @Override
@@ -282,6 +277,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(Date date) {
                 Log.d("date", String.valueOf(date));
+                DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
+                String strDate = dateFormat.format(date);
+                Intent intent=new Intent(MainActivity.this,Form.class);
+                intent.putExtra("date",strDate);
+                startActivity(intent);
 
             }
 
@@ -291,6 +291,29 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private void loadEvents(){
+
+        SQLiteDatabase db1=db.getWritableDatabase();
+        Cursor c= db1.rawQuery("Select * from case_details ",null);
+        StringBuffer b=new StringBuffer();
+
+        if (c.moveToFirst()) {
+            do {
+                //  String s=c.getString(0);
+                Toast.makeText(MainActivity.this,Global_storing_data, Toast.LENGTH_SHORT).show();
+                myDynamicCalendar.addEvent(Global_storing_data, "9:00", "10:00", "Case_Number "+c.getString(0)+"Section "+c.getString(1)+" Court "+c.getString(2));
+                /*a=data.get(0);
+                b1= data.get(1);
+                c1= data.get(2);
+                d1= data.get(3);
+*/
+
+            } while (c.moveToNext());
+
+        }
 
     }
 }

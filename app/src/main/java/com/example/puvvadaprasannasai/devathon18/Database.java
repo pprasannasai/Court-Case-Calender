@@ -6,17 +6,22 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.List;
+
 
 public class Database extends SQLiteOpenHelper{
 
     //Database db;
-
+/*
+    List<String> data;*/
     public Database(Context context) {
         super(context, "Case1.db", null,1);
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
+
 
         db.execSQL("Create table case_details(cc_no text, section text, court text, date_filing text, address text, mob_no text)");
         db.execSQL("Create table witness_details(cc_no text, w_no text, w_mob text, w_name text, w_address text)");
