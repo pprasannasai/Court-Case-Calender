@@ -160,12 +160,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_month_with_below_events:
                 showMonthViewWithBelowEvents();
                 return true;
-            case R.id.action_week:
+            /*case R.id.action_week:
                 showWeekView();
                 return true;
             case R.id.action_day:
                 showDayView();
-                return true;
+                return true;*/
             case R.id.action_agenda:
                 showAgendaView();
                 return true;
