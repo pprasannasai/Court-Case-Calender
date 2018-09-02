@@ -4,22 +4,27 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.Date;
 
 public class Form extends AppCompatActivity {
 
+    EditText date_filing;
     Date date;
-    Button submit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
-        Bundle getData=getIntent().getExtras();
+        date_filing=findViewById(R.id.date_filing);
+
         Intent intent=getIntent();
-       // date=new Date(getIntent().get("d1ate", -1));
-        Log.d("form","Date Recieved "+date);
+        String date_recieved=intent.getStringExtra("date");
+        Log.d("form","Date Recieved "+date_recieved);
+        date_filing.setText(date_recieved);
+        date_filing.setEnabled(false);
+
+
 
     }
 }
