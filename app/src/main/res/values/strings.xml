@@ -3,4 +3,10 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_basic">BasicActivity</string>
     <string name="title_activity_type_face">TypeFaceActivity</string>
+    <string name="title_activity_navigation">Navigation</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Devathon</string>
+    <string name="nav_header_subtitle">devathon@nitw.ac.in</string>
+    <string name="nav_header_desc">Navigation header</string>
 </resources>
