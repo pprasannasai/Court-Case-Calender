@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/cc_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CC Number"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="CC Number"
+        android:layout_marginBottom="10sp"
+        />
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/procedure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Add Proceedings"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="Add Proceedings"
+        android:layout_marginBottom="10sp"
+        />
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/next_hearing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Hearing Date"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="Hearing Date"
+        android:inputType="date"
+        android:layout_marginBottom="10sp"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"/>
+
+</LinearLayout>
